@@ -1,78 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Sign In</title>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,700">
-	<link rel="stylesheet" href="main.css">
+  <meta charset="UTF-8">
+  <title>Sign In</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,700">
+  <link rel="stylesheet" href="main.css">
 </head>
 <body>
-	<form name="signIn" class="container" onsubmit="signInWithEmailAndPassword(); return false;">
-		<div class="btn-container">
+  <form name="signIn" class="container" onsubmit="signInWithEmailAndPassword(); return false;">
+    <div class="btn-container">
 
-			<!--
-				To enable login with Github/Google setup the following environment variables inside auth/container.json:
-					WEDEPLOY_AUTH_GITHUB_CLIENT_ID, WEDEPLOY_AUTH_GITHUB_CLIENT_SECRET
-					WEDEPLOY_AUTH_GOOGLE_CLIENT_ID, WEDEPLOY_AUTH_GOOGLE_CLIENT_SECRET
-			-->
+      <!--
+        To enable login with Github/Google setup the following environment variables inside auth/container.json:
+          WEDEPLOY_AUTH_GITHUB_CLIENT_ID, WEDEPLOY_AUTH_GITHUB_CLIENT_SECRET
+          WEDEPLOY_AUTH_GOOGLE_CLIENT_ID, WEDEPLOY_AUTH_GOOGLE_CLIENT_SECRET
+      -->
 
-			<button class="btn btn-social btn-github" type="button" onclick="signInWithGithub();">
-				<span class="brand">
-					<span class="icon icon-github"></span>
-				</span>
-				<span class="label">Login with Github</span>
-			</button>
+      <button class="btn btn-social btn-github" type="button" onclick="signInWithGithub();">
+        <span class="brand">
+          <span class="icon icon-github"></span>
+        </span>
+        <span class="label">Login with Github</span>
+      </button>
 
-			<button class="btn btn-social btn-google" type="button" onclick="signInWithGoogle();">
-				<span class="brand">
-					<span class="icon icon-google"></span>
-				</span>
-				<span class="label">Login with Google</span>
-			</button>
-		</div>
+      <button class="btn btn-social btn-google" type="button" onclick="signInWithGoogle();">
+        <span class="brand">
+          <span class="icon icon-google"></span>
+        </span>
+        <span class="label">Login with Google</span>
+      </button>
+    </div>
 
-		<h1>Sign In</h1>
-		<input name="email" type="email" placeholder="Email" required>
-		<input name="password" type="password" placeholder="Password" required>
+    <h1>Sign In</h1>
+    <input name="email" type="email" placeholder="Email" required>
+    <input name="password" type="password" placeholder="Password" required>
 
-		<button type="submit">Submit</button>
-		<a href="signup.html">Create an account</a>
-		<a href="reset-link.html">Did you forget your password?</a>
-	</form>
+    <button type="submit">Submit</button>
+    <a href="signup.html">Create an account</a>
+    <a href="reset-link.html">Did you forget your password?</a>
+  </form>
 
-	<img class="logo" src="logo.png" width="150" alt="WeDeploy">
+  <img class="logo" src="logo.png" width="150" alt="WeDeploy">
 
-	<script src="https://cdn.wedeploy.com/api/4.0.2/wedeploy.js"></script>
-	<script>
-		var auth = WeDeploy.auth('auth-boilerplateauth.wedeploy.io');
+  <script src="https://cdn.wedeploy.com/api/4.0.2/wedeploy.js"></script>
+  <script>
+    var auth = WeDeploy.auth('auth-boilerplateauth.wedeploy.io');
 
-		function signInWithEmailAndPassword() {
-			auth.signInWithEmailAndPassword(signIn.email.value, signIn.password.value)
-				.then(function() {
-					alert('Sign-in successfully.');
-					signIn.reset();
-				})
-				.catch(function() {
-					alert('Sign-in failed.');
-					signIn.reset();
-				});
-		}
+    function signInWithEmailAndPassword() {
+      auth.signInWithEmailAndPassword(signIn.email.value, signIn.password.value)
+        .then(function() {
+          alert('Sign-in successfully.');
+          signIn.reset();
+        })
+        .catch(function() {
+          alert('Sign-in failed.');
+          signIn.reset();
+        });
+    }
 
-		function signInWithGithub() {
-			var githubProvider = new auth.provider.Github();
-			githubProvider.setProviderScope('user:email');
-			auth.signInWithRedirect(githubProvider);
-		}
+    function signInWithGithub() {
+      var githubProvider = new auth.provider.Github();
+      githubProvider.setProviderScope('user:email');
+      auth.signInWithRedirect(githubProvider);
+    }
 
-		function signInWithGoogle() {
-			var googleProvider = new auth.provider.Google();
-			googleProvider.setProviderScope('email');
-			auth.signInWithRedirect(googleProvider);
-		}
+    function signInWithGoogle() {
+      var googleProvider = new auth.provider.Google();
+      googleProvider.setProviderScope('email');
+      auth.signInWithRedirect(googleProvider);
+    }
 
-		auth.onSignIn(function(user) {
-			alert('Signed-in ' + user.email);
-		});
-	</script>
+    auth.onSignIn(function(user) {
+      alert('Signed-in ' + user.email);
+    });
+  </script>
 </body>
 </html>

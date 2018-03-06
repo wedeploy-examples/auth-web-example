@@ -1,42 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Sign Up</title>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,700">
-	<link rel="stylesheet" href="main.css">
+  <meta charset="UTF-8">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,700">
+  <link rel="stylesheet" href="main.css">
 </head>
 <body>
-	<form name="signUp" class="container" onsubmit="submitForm(); return false;">
-		<h1>Sign Up</h1>
-		<input name="name" type="text" placeholder="Name" required>
-		<input name="email" type="email" placeholder="Email" required>
-		<input name="password" type="password" placeholder="Password" required>
-		<button type="submit">Submit</button>
-		<a href="/">Back to login</a>
-		<a href="reset-link.html">Did you forget your password?</a>
-	</form>
+  <form name="signUp" class="container" onsubmit="submitForm(); return false;">
+    <h1>Sign Up</h1>
+    <input name="name" type="text" placeholder="Name" required>
+    <input name="email" type="email" placeholder="Email" required>
+    <input name="password" type="password" placeholder="Password" required>
+    <button type="submit">Submit</button>
+    <a href="/">Back to login</a>
+    <a href="reset-link.html">Did you forget your password?</a>
+  </form>
 
-	<img class="logo" src="logo.png" width="150" alt="WeDeploy">
+  <img class="logo" src="logo.png" width="150" alt="WeDeploy">
 
-	<script src="https://cdn.wedeploy.com/api/4.0.2/wedeploy.js"></script>
-	<script>
-		function submitForm() {
-			WeDeploy.auth('auth-boilerplateauth.wedeploy.io')
-				.createUser({
-					email: signUp.email.value,
-					name: signUp.name.value,
-					password: signUp.password.value
-				})
-				.then(function(user) {
-					alert('Sign-up successfully.');
-					location.href = '/';
-				})
-				.catch(function() {
-					alert('Sign-up failed. Try another email.');
-					signUp.reset();
-				});
-		}
-	</script>
+  <script src="https://cdn.wedeploy.com/api/4.0.2/wedeploy.js"></script>
+  <script>
+    function submitForm() {
+      WeDeploy.auth('auth-boilerplateauth.wedeploy.io')
+        .createUser({
+          email: signUp.email.value,
+          name: signUp.name.value,
+          password: signUp.password.value
+        })
+        .then(function(user) {
+          alert('Sign-up successfully.');
+          location.href = '/';
+        })
+        .catch(function() {
+          alert('Sign-up failed. Try another email.');
+          signUp.reset();
+        });
+    }
+  </script>
 </body>
 </html>
