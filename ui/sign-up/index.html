@@ -34,7 +34,7 @@
 
   <script src="https://cdn.wedeploy.com/api/4.0.2/wedeploy.js"></script>
   <script>
-    var auth = WeDeploy.auth('auth-authweb.wedeploy.io').auth('39c6c7bd-8fc0-4209-8ae7-f58cca36e346');
+    var auth = WeDeploy.auth('auth-authweb.wedeploy.io');
     
     function submitForm() {
       auth.createUser({
@@ -50,16 +50,14 @@
           .then(function() {
             location.href = '/welcome';
           })
-          .catch(function(err) {
-            console.log(err)
+          .catch(function() {
             alert('Sign in failed. Try another email.');
-            // signUp.reset();
+            signUp.reset();
           })
         })
-        .catch(function(err) {
-          console.log(err)
+        .catch(function() {
           alert('Sign up failed. Try another email.');
-          // signUp.reset();
+          signUp.reset();
         });
     }
   </script>

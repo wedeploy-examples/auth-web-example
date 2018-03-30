@@ -21,11 +21,18 @@ font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubun
 .container {
   max-width: 480px;
   margin: 0 auto 0;
-  padding: 15vh 24px 0;
+  padding: 5vh 24px 0;
   position: relative;
-  min-height: calc(100% - 15vh);
+  min-height: calc(100% - 5vh);
   display: flex;
   flex-direction: column;
+}
+
+@media (min-width: 400px) {
+  .container {
+    padding: 15vh 24px 0;
+    min-height: calc(100% - 15vh);
+  }
 }
 
 p {
@@ -48,10 +55,13 @@ font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubun
   color: rgba(14, 20, 26, .8);
   display: inline-block;
   font-size: 16px;
-  line-height: 48px;
+  line-height: 24px;
   outline: none;
-  padding: 0 12px;
+  padding: 12px 12px;
   width: calc(100% - 26px);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 input::placeholder {
@@ -61,6 +71,10 @@ input::placeholder {
 input:focus {
   border: 1px solid #00ae55;
   background: #ffffff;
+}
+
+input:disabled::placeholder {
+  color: rgba(14, 20, 26, .8);
 }
 
 .title {
