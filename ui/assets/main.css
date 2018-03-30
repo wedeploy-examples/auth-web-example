@@ -93,7 +93,12 @@ input:focus {
   text-decoration: none;
   margin: 15px 0 0;
   display: block;
-  font-size: 16px
+  font-size: 16px;
+  transition: color .333s ease;
+}
+
+.link:hover {
+  color: #068749;
 }
 
 .forget {
