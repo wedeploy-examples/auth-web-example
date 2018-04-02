@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="minimum-scale=1.0, width=device-width" name="viewport">
+  <title>Request a Reset Password Link</title>
+  <link rel="stylesheet" href="/assets/main.css">
+</head>
+<body>
+  <div class="container">
+    <form name="resetLink" class="form-container" onsubmit="submitForm(); return false;">
+      <h1 class="title">Reset Password</h1>
+      <p class="description">Request a reset password link.</p>
+      <div class="form-group">
+        <label>Email</label>
+        <input name="email" type="email" placeholder="Enter your email address" required>
+      </div>
+
+      <button class="btn submit" type="submit">Send</button>
+    </form>
+
+    <div class="signup-container">
+      <p>Want to try again?</p><a class="link" href="/">&nbsp;Back to Sign In.</a>
+    </div>
+  </div>
+
+  <script src="https://cdn.wedeploy.com/api/4.0.2/wedeploy.js"></script>
+  <script>
+    function submitForm() {
+      WeDeploy.auth('auth-authweb.wedeploy.io')
+        .sendPasswordResetEmail(resetLink.email.value)
+        .then(function() {
+          alert('Reset password link was sent to ' + resetLink.email.value);
+          resetLink.reset();
+        })
+        .catch(function() {
+          alert('Reset password link was not sent.');
+          resetLink.reset();
+        });
+    }
+  </script>
+</body>
+</html>

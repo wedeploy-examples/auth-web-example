@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="minimum-scale=1.0, width=device-width" name="viewport">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="/assets/main.css">
+</head>
+<body>
+  <div class="container">
+    <form class="form-container" name="signUp" onsubmit="submitForm(); return false;">
+      <h1 class="title">Sign Up</h1>
+      <p class="description">Enter your credentials below.</p>    
+      <div class="form-group">
+        <label>Name</label>
+        <input name="name" type="text" placeholder="Enter your name" required>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input name="email" type="email" placeholder="Enter your email address" required>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input name="password" type="password" placeholder="Enter your password" required>
+      </div>
+      <button class="btn submit" type="submit">Sign Up</button>
+    </form>
+
+    <div class="signup-container">
+      <p>Already have an account?</p><a class="link" href="/">&nbsp;Back to Sign In.</a>
+    </div>
+  </div>
+
+
+  <script src="https://cdn.wedeploy.com/api/4.0.2/wedeploy.js"></script>
+  <script>
+    var auth = WeDeploy.auth('auth-authweb.wedeploy.io');
+    
+    function submitForm() {
+      auth.createUser({
+          email: signUp.email.value,
+          name: signUp.name.value,
+          password: signUp.password.value
+        })
+        .then(function(user) {
+          auth.signInWithEmailAndPassword(
+            signUp.email.value,
+            signUp.password.value
+          )
+          .then(function() {
+            location.href = '/welcome';
+          })
+          .catch(function() {
+            alert('Sign in failed. Try another email.');
+            signUp.reset();
+          })
+        })
+        .catch(function() {
+          alert('Sign up failed. Try another email.');
+          signUp.reset();
+        });
+    }
+  </script>
+</body>
+</html>

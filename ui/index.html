@@ -2,54 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta content="minimum-scale=1.0, width=device-width" name="viewport">
   <title>Sign In</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,700">
-  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="https://cdn.wedeploy.io/fonts/Circular-Std.css">
+  <link rel="stylesheet" href="assets/main.css">
 </head>
 <body>
-  <form name="signIn" class="container" onsubmit="signInWithEmailAndPassword(); return false;">
+  <div class="container">
+    <form class="form-container" name="signIn" onsubmit="signInWithEmailAndPassword(); return false;">
+      <h1 class="title">Sign In</h1>
+      <p class="description">Enter your credentials below.</p>    
+      <div class="form-group">
+        <label>Email</label>
+        <input name="email" type="email" placeholder="Enter your email address" required>
+      </div>
+      <div class="form-group">
+        <div class="label-group">
+          <label>Password</label>
+          <a class="link forget" href="reset-link">Forgot Password?</a>
+        </div>
+        <input name="password" type="password" placeholder="Enter your password" required>
+      </div>
+      <button class="btn submit" type="submit">Sign In</button>
+    </form>
+
     <div class="btn-container">
+      <p class="description">Or use one of the following services.</p>
 
-      <!--
-        To enable login with Github/Google setup the following environment variables inside auth/wedeploy.json:
-          WEDEPLOY_AUTH_GITHUB_CLIENT_ID, WEDEPLOY_AUTH_GITHUB_CLIENT_SECRET
-          WEDEPLOY_AUTH_GOOGLE_CLIENT_ID, WEDEPLOY_AUTH_GOOGLE_CLIENT_SECRET
-      -->
-
-      <button class="btn btn-social btn-github" type="button" onclick="signInWithGithub();">
-        <span class="brand">
-          <span class="icon icon-github"></span>
-        </span>
-        <span class="label">Login with Github</span>
+      <button class="btn btn-social" type="button" onclick="signInWithGithub();">
+        <img class="github" src="assets/icon-github.svg"></>
       </button>
-
-      <button class="btn btn-social btn-google" type="button" onclick="signInWithGoogle();">
-        <span class="brand">
-          <span class="icon icon-google"></span>
-        </span>
-        <span class="label">Login with Google</span>
+      <button class="btn btn-social" type="button" onclick="signInWithGithub();">
+        <img class="google" src="assets/icon-google.svg"></>
       </button>
     </div>
 
-    <h1>Sign In</h1>
-    <input name="email" type="email" placeholder="Email" required>
-    <input name="password" type="password" placeholder="Password" required>
-
-    <button type="submit">Submit</button>
-    <a href="signup.html">Create an account</a>
-    <a href="reset-link.html">Did you forget your password?</a>
-  </form>
-
-  <img class="logo" src="logo.png" width="150" alt="WeDeploy">
+    <div class="signup-container">
+      <p>Need an account?</p><a class="link" href="sign-up">&nbsp;Sign up today.</a>
+    </div>
+  </div>
 
   <script src="https://cdn.wedeploy.com/api/4.0.2/wedeploy.js"></script>
   <script>
-    var auth = WeDeploy.auth('auth-boilerplateauth.wedeploy.io');
+    var auth = WeDeploy.auth('auth-authweb.wedeploy.io');
+
+    if (auth.currentUser) {document.location.href = '/welcome/';}
 
     function signInWithEmailAndPassword() {
       auth.signInWithEmailAndPassword(signIn.email.value, signIn.password.value)
         .then(function() {
-          alert('Sign-in successfully.');
           signIn.reset();
         })
         .catch(function() {
@@ -57,6 +58,10 @@
           signIn.reset();
         });
     }
+
+    // To enable login with Github/Google setup the following environment variables inside auth/wedeploy.json:
+    // WEDEPLOY_AUTH_GITHUB_CLIENT_ID, WEDEPLOY_AUTH_GITHUB_CLIENT_SECRET
+    // WEDEPLOY_AUTH_GOOGLE_CLIENT_ID, WEDEPLOY_AUTH_GOOGLE_CLIENT_SECRET
 
     function signInWithGithub() {
       var githubProvider = new auth.provider.Github();
@@ -71,7 +76,7 @@
     }
 
     auth.onSignIn(function(user) {
-      alert('Signed-in ' + user.email);
+      document.location.href = '/welcome/';
     });
   </script>
 </body>
